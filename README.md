@@ -10,12 +10,12 @@ This is a 3D remake of the classic arcade game Pacman using Unity, all built dur
 
 I generally try to minimize dependencies, but I'm a one man crew and can therefore only support Windows 10 as I ran that during development. Anyway, you need to have the following packages installed for everything to work properly:
 
-- Unity 2022.3.3f1 as the game engine. Install it via the [isntallation guide](https://docs.unity3d.com/2022.3/Documentation/Manual/GettingStartedInstallingUnity.html).
+- Unity 2022.3.3f1 as the game engine. Install it via the [installation guide](https://docs.unity3d.com/2022.3/Documentation/Manual/GettingStartedInstallingUnity.html).
 - Visual Studio 2022 Community as the code editor. Install it via the [website](https://visualstudio.microsoft.com/de/vs/community/).
 
 ## How to use it
 
-Import it into a Unity 2022.3.3f1 instance and run it from there or simply take a look at [Releases](https://github.com/locxter/pcmn3d/releases) section.
+Import it into a Unity 2022.3.3f1 instance and run it from there or simply take a look at the [Releases](https://github.com/locxter/pcmn3d/releases) section.
 
 ## Credits
 
