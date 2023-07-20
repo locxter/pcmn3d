@@ -12,7 +12,6 @@ I generally try to minimize dependencies, but I'm a one man crew and can therefo
 
 - Unity 2022.3.3f1 as the game engine. Install it via the [isntallation guide](https://docs.unity3d.com/2022.3/Documentation/Manual/GettingStartedInstallingUnity.html).
 - Visual Studio 2022 Community as the code editor. Install it via the [website](https://visualstudio.microsoft.com/de/vs/community/).
-SDKMAN! for managing all the JVM dependencies. Install it via the [installation guide](https://sdkman.io/install).
 
 ## How to use it
 
