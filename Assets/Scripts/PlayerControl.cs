@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -20,12 +23,17 @@ public class PlayerControl : MonoBehaviour
   private Vector3 _direction;
   private Vector3 _destination = Vector3.zero;
   private Vector3 _startPosition = Vector3.zero;
+  private bool _forwardPressed = false;
+  private bool _leftPressed = false;
+  private bool _backPressed = false;
+  private bool _rightPressed = false;
 
   private void Awake()
   {
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
     _startPosition = transform.position;
+    EnhancedTouchSupport.Enable();
   }
 
   private void FixedUpdate()
@@ -37,10 +45,16 @@ public class PlayerControl : MonoBehaviour
 
   private void Rotate()
   {
-    _horizontalRotation = Input.GetAxis("Mouse X");
-    float verticalRotation = Input.GetAxis("Mouse Y");
-    transform.Rotate(0, _horizontalRotation * MouseSensitivity, 0);
-    CameraTransform.Rotate(-verticalRotation * MouseSensitivity, 0, 0);
+    Mouse mouse = Mouse.current;
+    _horizontalRotation = mouse.delta.x.ReadValue();
+    float verticalRotation = mouse.delta.y.ReadValue();
+    #if (UNITY_ANDROID || UNITY_IOS)
+        float speedCorrection = 1.25f;
+    #else
+        float speedCorrection = 0.05f;
+    #endif
+    transform.Rotate(0, _horizontalRotation * speedCorrection * MouseSensitivity, 0);
+    CameraTransform.Rotate(-verticalRotation * speedCorrection * MouseSensitivity, 0, 0);
     Vector3 currentRotation = CameraTransform.localEulerAngles;
     if (currentRotation.x > 180)
     {
@@ -52,8 +66,44 @@ public class PlayerControl : MonoBehaviour
 
   private void Move()
   {
-    float horizontalMove = Input.GetAxis("Horizontal");
-    float verticalMove = Input.GetAxis("Vertical");
+    Keyboard keyboard = Keyboard.current;
+    // Forward
+    if (keyboard.wKey.wasPressedThisFrame && !_forwardPressed)
+    {
+      _forwardPressed = true;
+    } else if (keyboard.wKey.wasReleasedThisFrame && _forwardPressed)
+    {
+      _forwardPressed = false;
+    }
+    // Left
+    if (keyboard.aKey.wasPressedThisFrame && !_leftPressed)
+    {
+      _leftPressed = true;
+    }
+    else if (keyboard.aKey.wasReleasedThisFrame && _leftPressed)
+    {
+      _leftPressed = false;
+    }
+    // Back
+    if (keyboard.sKey.wasPressedThisFrame && !_backPressed)
+    {
+      _backPressed = true;
+    }
+    else if (keyboard.sKey.wasReleasedThisFrame && _backPressed)
+    {
+      _backPressed = false;
+    }
+    // Right
+    if (keyboard.dKey.wasPressedThisFrame && !_rightPressed)
+    {
+      _rightPressed = true;
+    }
+    else if (keyboard.dKey.wasReleasedThisFrame && _rightPressed)
+    {
+      _rightPressed = false;
+    }
+    float verticalMove = (_forwardPressed ? 1 : 0) + (_backPressed ? -1 : 0);
+    float horizontalMove = (_rightPressed ? 1 : 0) + (_leftPressed ? -1 : 0);
     _direction = (transform.forward * verticalMove) + (transform.right * horizontalMove);
     if (_destination != Vector3.zero)
     {
