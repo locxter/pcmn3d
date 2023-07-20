@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
-using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -33,7 +31,6 @@ public class PlayerControl : MonoBehaviour
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
     _startPosition = transform.position;
-    EnhancedTouchSupport.Enable();
   }
 
   private void FixedUpdate()
