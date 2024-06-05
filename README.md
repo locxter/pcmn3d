@@ -2,6 +2,8 @@
 
 ## Overview
 
+> This project is **DEPRECATED**, therefore might not be on par with my current coding standards and will not receive any updates now or in the future.
+
 ![Overview image](overview.jpeg)
 
 This is a 3D remake of the classic arcade game Pacman using Unity, all built during my work placement at [ise](https://www.ise.de/). As this is my first (and probably only) Unity project, the code quality might not be on par with my other projects and it's very likely I didn't follow all (or even most) best practices of this toolset. Also note that this remake doesn't even nearly implement all the rules and mechanics of the original game, which despite its age is still a really advanced and intricate master piece. For the rules and mechanics it implements, I tries to be as close to the original as possible though.
